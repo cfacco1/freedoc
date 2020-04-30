@@ -3,6 +3,7 @@ require 'faker'
 Doctor.destroy_all
 Patient.destroy_all
 Appointment.destroy_all
+City.destroy_all
 
 25.times do
   Patient.create!(
@@ -24,4 +25,10 @@ end
   City.create!(
     name_town: Faker::Address.city
   )
+end
+
+400.times do |ap|
+  Appointment.create!(doctor: Doctor.all.sample, patient: Patient.all.sample, date: Faker::Time.between_dates(from: Date.today - 1000, to: Date.today + 45, period: :day), city: City.all.sample)
+  
+  ap += 1
 end
